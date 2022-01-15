@@ -19213,12 +19213,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var filepond_dist_filepond_min_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! filepond/dist/filepond.min.css */ "./node_modules/filepond/dist/filepond.min.css");
 /* harmony import */ var filepond_plugin_file_validate_type__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! filepond-plugin-file-validate-type */ "./node_modules/filepond-plugin-file-validate-type/dist/filepond-plugin-file-validate-type.js");
 /* harmony import */ var filepond_plugin_file_validate_type__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(filepond_plugin_file_validate_type__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var filepond__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! filepond */ "./node_modules/filepond/dist/filepond.js");
-/* harmony import */ var filepond__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(filepond__WEBPACK_IMPORTED_MODULE_3__);
 
 
 
-
+(0,vue_filepond__WEBPACK_IMPORTED_MODULE_0__.setOptions)({
+  server: {
+    process: {
+      url: './upload',
+      headers: {
+        'X-CSRF-Token': document.head.querySelector('meta[name="csrf_token"]').content
+      }
+    }
+  }
+});
 var FilePond = vue_filepond__WEBPACK_IMPORTED_MODULE_0___default()((filepond_plugin_file_validate_type__WEBPACK_IMPORTED_MODULE_2___default()));
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
@@ -19260,7 +19267,6 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     name: "image",
     ref: "pond",
     "label-idle": "Click to choose image, or drag here...",
-    server: "/upload",
     onInit: $options.filepondInitialized,
     "accepted-file-types": "image/*"
   }, null, 8
