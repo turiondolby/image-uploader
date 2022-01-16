@@ -19232,12 +19232,32 @@ var FilePond = vue_filepond__WEBPACK_IMPORTED_MODULE_0___default()((filepond_plu
     FilePond: FilePond
   },
   data: function data() {
-    return {};
+    return {
+      images: []
+    };
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    axios.get('/images').then(function (response) {
+      _this.images = response.data;
+    })["catch"](function (error) {
+      console.log(error);
+    });
   },
   methods: {
     filepondInitialized: function filepondInitialized() {
       console.log('Filepond is ready!');
       console.log('Filepond object:', this.$refs.pond);
+    },
+    handleProcessedFile: function handleProcessedFile(error, file) {
+      if (error) {
+        console.error(error);
+        return;
+      } //add file to our images array
+
+
+      this.images.unshift(file.serverId);
     }
   }
 });
@@ -19260,18 +19280,43 @@ __webpack_require__.r(__webpack_exports__);
 var _hoisted_1 = {
   "class": "mt-24"
 };
+var _hoisted_2 = {
+  "class": "mt-8 mb-24"
+};
+
+var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", {
+  "class": "text-2xl font-medium text-center"
+}, "Image Gallery", -1
+/* HOISTED */
+);
+
+var _hoisted_4 = {
+  "class": "grid grid-cols-3 gap-2 justify-evenly mt-4"
+};
+var _hoisted_5 = ["src"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_file_pond = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("file-pond");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_file_pond, {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_file_pond, {
     name: "image",
     ref: "pond",
     "label-idle": "Click to choose image, or drag here...",
     onInit: $options.filepondInitialized,
-    "accepted-file-types": "image/*"
+    "accepted-file-types": "image/*",
+    onProcessfile: $options.handleProcessedFile
   }, null, 8
   /* PROPS */
-  , ["onInit"])]);
+  , ["onInit", "onProcessfile"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.images, function (image, index) {
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
+      key: index
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+      src: '/storage/images/' + image
+    }, null, 8
+    /* PROPS */
+    , _hoisted_5)]);
+  }), 128
+  /* KEYED_FRAGMENT */
+  ))])])]);
 }
 
 /***/ }),
