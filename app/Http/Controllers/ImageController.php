@@ -23,7 +23,7 @@ class ImageController extends Controller
     {
         //validate the incoming file
         $request->validate([
-            'image' => 'bail|required|file|image'
+            'image' => 'bail|required|file|image|mimes:jpeg,jpg,png'
         ]);
 
         //save the file in storage
